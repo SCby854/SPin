@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动取消静音</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- 视频 -->
+    <video id="video" autoplay loop muted>
+        <source src="https://scby854.github.io/SPin/1.mp4" type="video/mp4">
+        您的浏览器不支持视频播放。
+    </video>
+
+    <script>
+        const video = document.getElementById('video');
+
+        // 监听视频开始播放事件
+        video.addEventListener('play', () => {
+            console.log('视频开始播放'); // 检查控制台是否有输出
+            video.muted = false; // 取消静音
+        });
+
+        // 监听视频加载完成事件
+        video.addEventListener('loadeddata', () => {
+            console.log('视频加载完成'); // 检查控制台是否有输出
+            video.play(); // 尝试播放视频
+        });
+
+        // 监听视频错误事件
+        video.addEventListener('error', (e) => {
+            console.error('视频播放错误:', e); // 检查控制台是否有错误信息
+        });
+    </script>
+</body>
+</html>
